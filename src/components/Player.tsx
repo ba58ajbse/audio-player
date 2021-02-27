@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { PlayCircleOutline, PauseCircleOutline } from '@material-ui/icons'
 import styled from 'styled-components'
 import Progress from './Progress'
@@ -6,15 +6,37 @@ import TrackDuration from './TrackDuration'
 import TrackCurrentTime from './TrackCurrentTime'
 import TrackTimeWrap from './TrackTimeWrap'
 import VolumeBar from './VolumeBar'
+import audioSrc from '../assets/audio/lilla.mp3'
 
 const Player: React.FC = () => {
+  const [track, setTrack] = useState<HTMLAudioElement>(new Audio())
+  const [playState, setPlayState] = useState<boolean>(false)
+
+  useEffect(() => {
+    track.src = audioSrc
+  }, [])
+
+  const handlePlayPause = () => {
+    if (track.paused) {
+      track.play()
+      setPlayState(true)
+    } else {
+      track.pause()
+      setPlayState(false)
+    }
+  }
+
   return (
     <>
       <StyledInfo>
         <StyledTrackTitle>title</StyledTrackTitle>
         <StyledArtistName>artist</StyledArtistName>
-        <StyledPlyaButton type="button">
-          <PlayCircleOutline style={{ fontSize: 65 }} />
+        <StyledPlyaButton type="button" onClick={() => handlePlayPause()}>
+          {playState ? (
+            <PauseCircleOutline style={{ fontSize: 65 }} />
+          ) : (
+            <PlayCircleOutline style={{ fontSize: 65 }} />
+          )}
         </StyledPlyaButton>
       </StyledInfo>
       <Progress />
