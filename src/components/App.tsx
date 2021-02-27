@@ -1,12 +1,18 @@
 import React from 'react'
-import Audio from './Audio'
-import '../assets/css/App.css'
+import { ThemeProvider } from 'styled-components'
+import theme from './utils/theme'
+// import Audio from './Audio'
+import Main from './Main'
+import Player from './Player'
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <Audio />
-    </div>
+    <ThemeProvider theme={theme}>
+      <Main>
+        {/* <Audio /> */}
+        <Player />
+      </Main>
+    </ThemeProvider>
   )
 }
 
