@@ -22,6 +22,3 @@ const StyledDuration = styled(Grid)`
     line-height: 60px;
   }
 `
-// const StyledDuration = styled.div`
-//   color: ${(props) => props.theme.colors.primaryText};
-// `
