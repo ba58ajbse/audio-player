@@ -47,7 +47,7 @@ const Player: React.FC = () => {
           )}
         </StyledPlyaButton>
       </StyledInfo>
-      <Progress />
+      <Progress duration={duration} currentTime={currentTime} />
       <TrackTimeWrap>
         <TrackCurrentTime currentTime={currentTime} />
         <VolumeBar />

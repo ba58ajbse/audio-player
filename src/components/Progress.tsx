@@ -1,11 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Progress: React.FC = () => {
+type PropType = {
+  duration: number
+  currentTime: number
+}
+
+const Progress: React.FC<PropType> = ({ duration, currentTime }) => {
   return (
     <StyledProgressArea>
       <div className="progress-bar">
-        <div className="progress-current" />
+        <StyledProgressCurrent duration={duration} currentTime={currentTime} />
       </div>
     </StyledProgressArea>
   )
@@ -23,10 +28,10 @@ const StyledProgressArea = styled.div`
     display: inline-block;
     border-radius: 10px;
   }
-  .progress-current {
-    width: 40%;
-    height: 6px;
-    background-color: ${(props) => props.theme.colors.third};
-    border-radius: 10px;
-  }
+`
+const StyledProgressCurrent = styled.div<PropType>`
+  width: ${(props) => (props.currentTime / props.duration) * 100}%;
+  height: 6px;
+  background-color: ${(props) => props.theme.colors.third};
+  border-radius: 10px;
 `
