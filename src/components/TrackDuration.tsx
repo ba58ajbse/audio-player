@@ -1,12 +1,17 @@
 import React from 'react'
 import { Grid } from '@material-ui/core'
 import styled from 'styled-components'
+import setTimeDisp from './utils/util'
 
-const TrackDuration: React.FC = () => {
+type PropType = {
+  duration: number
+}
+
+const TrackDuration: React.FC<PropType> = ({ duration }) => {
   return (
     <>
       <StyledDuration item xs={1}>
-        <p>04:32</p>
+        <p>{setTimeDisp(duration)}</p>
       </StyledDuration>
     </>
   )
@@ -20,5 +25,6 @@ const StyledDuration = styled(Grid)`
   p {
     margin: 0;
     line-height: 60px;
+    font-variant-numeric: tabular-nums;
   }
 `

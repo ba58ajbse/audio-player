@@ -11,9 +11,17 @@ import audioSrc from '../assets/audio/lilla.mp3'
 const Player: React.FC = () => {
   const [track, setTrack] = useState<HTMLAudioElement>(new Audio())
   const [playState, setPlayState] = useState<boolean>(false)
+  const [duration, setDuration] = useState(0)
+  const [currentTime, setCrrentTime] = useState(0)
 
   useEffect(() => {
     track.src = audioSrc
+    track.onloadedmetadata = () => {
+      setDuration(track.duration)
+    }
+    track.ontimeupdate = () => {
+      setCrrentTime(track.currentTime)
+    }
   }, [])
 
   const handlePlayPause = () => {
@@ -41,9 +49,9 @@ const Player: React.FC = () => {
       </StyledInfo>
       <Progress />
       <TrackTimeWrap>
-        <TrackCurrentTime />
+        <TrackCurrentTime currentTime={currentTime} />
         <VolumeBar />
-        <TrackDuration />
+        <TrackDuration duration={duration} />
       </TrackTimeWrap>
     </>
   )

@@ -5,13 +5,12 @@ const zeroPad = (str: string): string => {
   return str
 }
 
-const setTimeDisp = (time: number): { numSec: number; minSec: string } => {
-  const numSec = Math.floor(time)
+const setTimeDisp = (time: number): string => {
   const min = Math.floor(time / 60)
   const sec = Math.floor(time - min * 60)
   const minSec = `${zeroPad(String(min))}:${zeroPad(String(sec))}`
 
-  return { numSec, minSec }
+  return minSec
 }
 
 export default setTimeDisp
