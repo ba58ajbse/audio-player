@@ -16,6 +16,7 @@ const Player: React.FC = () => {
 
   useEffect(() => {
     track.src = audioSrc
+    track.volume = 0.5
     track.onloadedmetadata = () => {
       setDuration(track.duration)
     }
@@ -34,6 +35,13 @@ const Player: React.FC = () => {
     }
   }
 
+  const muteToggle = () => {
+    track.muted = !track.muted
+  }
+  const changeVolume = (value: number) => {
+    track.volume = value
+  }
+
   return (
     <>
       <StyledInfo>
@@ -50,7 +58,7 @@ const Player: React.FC = () => {
       <Progress duration={duration} currentTime={currentTime} />
       <TrackTimeWrap>
         <TrackCurrentTime currentTime={currentTime} />
-        <VolumeBar />
+        <VolumeBar muteToggle={muteToggle} changeVolume={changeVolume} />
         <TrackDuration duration={duration} />
       </TrackTimeWrap>
     </>
