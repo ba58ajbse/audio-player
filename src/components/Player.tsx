@@ -23,7 +23,18 @@ const Player: React.FC = () => {
     track.ontimeupdate = () => {
       setCrrentTime(track.currentTime)
     }
+    document.addEventListener('keydown', spaceKeyPress, false)
+
+    return () => {
+      document.removeEventListener('keydown', spaceKeyPress, false)
+    }
   }, [])
+
+  const spaceKeyPress = (e: KeyboardEvent) => {
+    if (e.code === 'Space') {
+      handlePlayPause()
+    }
+  }
 
   const handlePlayPause = () => {
     if (track.paused) {
