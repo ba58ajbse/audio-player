@@ -41,10 +41,25 @@ const VolumeBar: React.FC<PropType> = ({ muteToggle, changeVolume }) => {
       setIsMute(!isMute)
     }
   }
-  const handleChangeVolume = (value: string) => {
+  const handleChangeVolume = (value: string | number) => {
     const val = Number(value)
     changeVolume(val / 100)
     setVolumeVal(val)
+  }
+  const handleOnWheel = (deltaY: number) => {
+    let val
+    if (deltaY > 0) {
+      val = volumeVal - 5
+      if (val <= 0) {
+        val = 0
+      }
+    } else {
+      val = volumeVal + 5
+      if (val >= 100) {
+        val = 100
+      }
+    }
+    handleChangeVolume(val)
   }
   return (
     <Grid item xs={10}>
@@ -68,6 +83,9 @@ const VolumeBar: React.FC<PropType> = ({ muteToggle, changeVolume }) => {
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               handleChangeVolume(e.target.value)
             }
+            onWheel={(e: any) => {
+              handleOnWheel(e.deltaY)
+            }}
           />
         )}
       </StyledVolumeArea>
