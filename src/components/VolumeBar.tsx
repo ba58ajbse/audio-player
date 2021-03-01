@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent, useEffect } from 'react'
 import { Grid } from '@material-ui/core'
 import { VolumeUp, VolumeOff } from '@material-ui/icons'
 import styled from 'styled-components'
+import InitBtn from './utils/styled'
 
 type PropType = {
   muteToggle: () => void
@@ -62,7 +63,7 @@ const VolumeBar: React.FC<PropType> = ({ muteToggle, changeVolume }) => {
     handleChangeVolume(val)
   }
   return (
-    <Grid item xs={10}>
+    <Grid item xs={9}>
       <StyledVolumeArea
         isDispSlider={isDispSlider}
         onMouseEnter={dispVolSlider}
@@ -70,9 +71,9 @@ const VolumeBar: React.FC<PropType> = ({ muteToggle, changeVolume }) => {
         onMouseLeave={noDispVolSlider}
         onBlur={noDispVolSlider}
       >
-        <button type="button" onClick={handleMute}>
+        <StyledBtn type="button" onClick={handleMute}>
           {isMute ? <VolumeOff /> : <VolumeUp />}
-        </button>
+        </StyledBtn>
         {isDispSlider && (
           <input
             type="range"
@@ -99,22 +100,18 @@ const StyledVolumeArea = styled.div<StyledProp>`
   position: relative;
   width: ${(props) => (props.isDispSlider ? 160 : 30)}px;
   height: 60px;
-  button {
-    position: absolute;
-    top: 18px;
-    padding: 0;
-    border: none;
-    outline: none;
-    background-color: transparent;
-    color: ${(props) => props.theme.colors.primaryText};
-    cursor: pointer;
-    &:hover {
-      opacity: 0.8;
-    }
-  }
   input {
     position: absolute;
     top: 20px;
     left: 24px;
+  }
+`
+const StyledBtn = styled(InitBtn)`
+  position: absolute;
+  top: 18px;
+  padding: 0;
+  color: ${(props) => props.theme.colors.primaryText};
+  &:hover {
+    opacity: 0.8;
   }
 `

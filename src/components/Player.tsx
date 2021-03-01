@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { PlayCircleOutline, PauseCircleOutline } from '@material-ui/icons'
 import styled from 'styled-components'
+import InitBtn from './utils/styled'
 import Progress from './Progress'
 import TrackDuration from './TrackDuration'
 import TrackCurrentTime from './TrackCurrentTime'
-import TrackTimeWrap from './TrackTimeWrap'
+import PlayerBottom from './PlayerBottom'
 import VolumeBar from './VolumeBar'
 import audioSrc from '../assets/audio/lilla.mp3'
+import Download from './Download'
 
 const Player: React.FC = () => {
   const [track, setTrack] = useState<HTMLAudioElement>(new Audio())
@@ -67,11 +69,12 @@ const Player: React.FC = () => {
         </StyledPlyaButton>
       </StyledInfo>
       <Progress duration={duration} currentTime={currentTime} />
-      <TrackTimeWrap>
+      <PlayerBottom>
         <TrackCurrentTime currentTime={currentTime} />
         <VolumeBar muteToggle={muteToggle} changeVolume={changeVolume} />
+        <Download />
         <TrackDuration duration={duration} />
-      </TrackTimeWrap>
+      </PlayerBottom>
     </>
   )
 }
@@ -82,12 +85,8 @@ const StyledInfo = styled.div`
   width: 100%;
   padding: 10px 10px 0 10px;
 `
-const StyledPlyaButton = styled.button`
-  border: none;
-  outline: none;
-  background-color: transparent;
+const StyledPlyaButton = styled(InitBtn)`
   color: ${(props) => props.theme.colors.primaryText};
-  cursor: pointer;
   &:hover {
     opacity: 0.8;
   }
