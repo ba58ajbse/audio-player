@@ -80,7 +80,7 @@ export default Player
 
 const StyledInfo = styled.div`
   width: 100%;
-  padding: 10px 10px 0 10px;
+  padding: 20px 10px 0 10px;
 `
 const StyledPlyaButton = styled.button`
   border: none;
@@ -93,6 +93,7 @@ const StyledPlyaButton = styled.button`
   }
 `
 const StyledTrackTitle = styled.div`
+  padding-left: 10px;
   margin-bottom: 8px;
   color: ${(props) => props.theme.colors.primaryText};
   font-size: 1.5em;
@@ -100,6 +101,7 @@ const StyledTrackTitle = styled.div`
   letter-spacing: 0.2em;
 `
 const StyledArtistName = styled.div`
+  padding-left: 10px;
   margin-bottom: 12px;
   color: ${(props) => props.theme.colors.primaryText};
   font-size: 1.2em;
