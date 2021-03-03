@@ -36,6 +36,11 @@ const Player: React.FC = () => {
     }
   }
 
+  const jumpPlayPosition = (position: number) => {
+    const targetTime = duration * position
+    track.currentTime = targetTime
+  }
+
   const handlePlayPause = () => {
     if (track.paused) {
       track.play()
@@ -66,7 +71,11 @@ const Player: React.FC = () => {
           )}
         </StyledPlyaButton>
       </StyledInfo>
-      <Progress duration={duration} currentTime={currentTime} />
+      <Progress
+        duration={duration}
+        currentTime={currentTime}
+        jumpPlayPosition={jumpPlayPosition}
+      />
       <TrackTimeWrap>
         <TrackCurrentTime currentTime={currentTime} />
         <VolumeBar muteToggle={muteToggle} changeVolume={changeVolume} />
