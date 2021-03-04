@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent, useEffect } from 'react'
 import { Grid } from '@material-ui/core'
 import { VolumeUp, VolumeOff } from '@material-ui/icons'
 import styled from 'styled-components'
+import { Transition } from 'react-transition-group'
 
 type PropType = {
   muteToggle: () => void
@@ -9,6 +10,9 @@ type PropType = {
 }
 type StyledProp = {
   isDispSlider: boolean
+}
+type StyledVolumeProp = {
+  state: string
 }
 
 const VolumeBar: React.FC<PropType> = ({ muteToggle, changeVolume }) => {
@@ -27,13 +31,6 @@ const VolumeBar: React.FC<PropType> = ({ muteToggle, changeVolume }) => {
       setIsMute(false)
     }
   }, [volumeVal])
-
-  const dispVolSlider = () => {
-    setIsDispSlider(true)
-  }
-  const noDispVolSlider = () => {
-    setIsDispSlider(false)
-  }
 
   const handleMute = () => {
     if (volumeVal !== 0) {
@@ -65,29 +62,32 @@ const VolumeBar: React.FC<PropType> = ({ muteToggle, changeVolume }) => {
     <Grid item xs={10}>
       <StyledVolumeArea
         isDispSlider={isDispSlider}
-        onMouseEnter={dispVolSlider}
-        onFocus={dispVolSlider}
-        onMouseLeave={noDispVolSlider}
-        onBlur={noDispVolSlider}
+        onMouseEnter={() => setIsDispSlider(true)}
+        onFocus={() => setIsDispSlider(true)}
+        onMouseLeave={() => setIsDispSlider(false)}
+        onBlur={() => setIsDispSlider(false)}
       >
         <button type="button" onClick={handleMute}>
           {isMute ? <VolumeOff /> : <VolumeUp />}
         </button>
-        {isDispSlider && (
-          <input
-            type="range"
-            min="0"
-            max="100"
-            step="0.01"
-            value={volumeVal}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              handleChangeVolume(e.target.value)
-            }
-            onWheel={(e: any) => {
-              handleOnWheel(e.deltaY)
-            }}
-          />
-        )}
+        <Transition in={isDispSlider} timeout={200}>
+          {(state) => (
+            <StyledVolumeBar
+              type="range"
+              min="0"
+              max="100"
+              step="0.01"
+              value={volumeVal}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                handleChangeVolume(e.target.value)
+              }
+              onWheel={(e: any) => {
+                handleOnWheel(e.deltaY)
+              }}
+              state={state}
+            />
+          )}
+        </Transition>
       </StyledVolumeArea>
     </Grid>
   )
@@ -116,5 +116,14 @@ const StyledVolumeArea = styled.div<StyledProp>`
     position: absolute;
     top: 20px;
     left: 24px;
+    transition: 0.5s;
   }
+`
+const StyledVolumeBar = styled.input<StyledVolumeProp>`
+  position: absolute;
+  top: 20px;
+  left: 24px;
+  transition: 0.3s;
+  opacity: ${(props) => (props.state === 'entered' ? '1' : '0')};
+  display: ${(props) => (props.state === 'exited' ? 'none' : 'block')};
 `
