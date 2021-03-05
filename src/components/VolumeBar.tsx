@@ -44,18 +44,14 @@ const VolumeBar: React.FC<PropType> = ({ muteToggle, changeVolume }) => {
     setVolumeVal(val)
   }
   const handleOnWheel = (deltaY: number) => {
-    let val
-    if (deltaY > 0) {
-      val = volumeVal - 5
-      if (val <= 0) {
-        val = 0
-      }
-    } else {
-      val = volumeVal + 5
-      if (val >= 100) {
-        val = 100
-      }
+    let val = deltaY > 0 ? volumeVal + 5 : volumeVal - 5
+    if (val <= 0) {
+      val = 0
     }
+    if (val >= 100) {
+      val = 100
+    }
+
     handleChangeVolume(val)
   }
   return (
@@ -112,18 +108,12 @@ const StyledVolumeArea = styled.div<StyledProp>`
       opacity: 0.8;
     }
   }
-  input {
-    position: absolute;
-    top: 20px;
-    left: 24px;
-    transition: 0.5s;
-  }
 `
 const StyledVolumeBar = styled.input<StyledVolumeProp>`
   position: absolute;
   top: 20px;
   left: 24px;
-  transition: 0.3s;
+  transition: 0.1s;
   opacity: ${(props) => (props.state === 'entered' ? '1' : '0')};
   display: ${(props) => (props.state === 'exited' ? 'none' : 'block')};
 `
