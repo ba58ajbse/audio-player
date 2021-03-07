@@ -4,6 +4,8 @@ import theme from './utils/theme'
 import Main from './Main'
 import Player from './Player'
 import Header from './Header'
+import CommentArea from './CommentArea'
+import CommentInputField from './CommentInputField'
 
 const App: React.FC = () => {
   return (
@@ -11,6 +13,8 @@ const App: React.FC = () => {
       <Main>
         <Header />
         <Player />
+        <CommentArea />
+        <CommentInputField />
       </Main>
     </ThemeProvider>
   )
