@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, KeyboardEvent } from 'react'
+import React, { useState, ChangeEvent } from 'react'
 import { Grid, TextField, IconButton, Divider } from '@material-ui/core'
 import { Send } from '@material-ui/icons'
 import styled from 'styled-components'
@@ -14,34 +14,36 @@ const CommentInputField: React.FC = () => {
   return (
     <>
       <Divider />
-      <StyledGridContainer container>
-        <Grid item xs={1} />
-        <Grid item xs={10}>
-          <StyledTextField
-            autoFocus
-            fullWidth
-            multiline
-            placeholder="コメントを入力"
-            value={comment}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setComment(e.target.value)
-            }
-            onCompositionStart={() => setIsComposed(true)}
-            onCompositionEnd={() => setIsComposed(false)}
-          />
+      <StyledWrap>
+        <Grid container>
+          <Grid item xs={1} />
+          <Grid item xs={9}>
+            <StyledTextField
+              autoFocus
+              fullWidth
+              multiline
+              placeholder="コメントを入力"
+              value={comment}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setComment(e.target.value)
+              }
+              onCompositionStart={() => setIsComposed(true)}
+              onCompositionEnd={() => setIsComposed(false)}
+            />
+          </Grid>
+          <Grid item xs={2}>
+            <IconButton disabled={comment === ''} onClick={() => sendMessage()}>
+              <StyledSendIcon />
+            </IconButton>
+          </Grid>
         </Grid>
-        <Grid item xs={1}>
-          <IconButton disabled={comment === ''} onClick={() => sendMessage()}>
-            <StyledSendIcon />
-          </IconButton>
-        </Grid>
-      </StyledGridContainer>
+      </StyledWrap>
     </>
   )
 }
 export default CommentInputField
 
-const StyledGridContainer = styled(Grid)`
+const StyledWrap = styled.div`
   margin-bottom: 12px;
 `
 const StyledTextField = styled(TextField)`
