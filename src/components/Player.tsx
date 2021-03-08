@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useMediaQuery } from '@material-ui/core'
 import { PlayCircleOutline, PauseCircleOutline } from '@material-ui/icons'
 import styled from 'styled-components'
 import Progress from './Progress'
@@ -13,6 +14,7 @@ const Player: React.FC = () => {
   const [playState, setPlayState] = useState<boolean>(false)
   const [duration, setDuration] = useState(0)
   const [currentTime, setCrrentTime] = useState(0)
+  const matches = useMediaQuery('(min-width:600px)')
 
   useEffect(() => {
     track.src = audioSrc
@@ -61,8 +63,10 @@ const Player: React.FC = () => {
   return (
     <>
       <StyledInfo>
-        <StyledTrackTitle>title</StyledTrackTitle>
-        <StyledArtistName>artist</StyledArtistName>
+        <div>
+          <StyledTrackTitle>title</StyledTrackTitle>
+          <StyledArtistName>artist</StyledArtistName>
+        </div>
         <StyledPlyaButton type="button" onClick={() => handlePlayPause()}>
           {playState ? (
             <PauseCircleOutline style={{ fontSize: 65 }} />
@@ -78,7 +82,9 @@ const Player: React.FC = () => {
       />
       <TrackTimeWrap>
         <TrackCurrentTime currentTime={currentTime} />
-        <VolumeBar muteToggle={muteToggle} changeVolume={changeVolume} />
+        {matches && (
+          <VolumeBar muteToggle={muteToggle} changeVolume={changeVolume} />
+        )}
         <TrackDuration duration={duration} />
       </TrackTimeWrap>
     </>
@@ -88,8 +94,12 @@ const Player: React.FC = () => {
 export default Player
 
 const StyledInfo = styled.div`
-  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto;
   padding: 20px 10px 0 10px;
+  @media (min-width: 600px) {
+    display: block;
+  }
 `
 const StyledPlyaButton = styled.button`
   border: none;

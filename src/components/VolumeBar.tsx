@@ -1,5 +1,4 @@
 import React, { useState, ChangeEvent, useEffect } from 'react'
-import { Grid } from '@material-ui/core'
 import { VolumeUp, VolumeOff } from '@material-ui/icons'
 import styled from 'styled-components'
 import { Transition } from 'react-transition-group'
@@ -55,7 +54,7 @@ const VolumeBar: React.FC<PropType> = ({ muteToggle, changeVolume }) => {
     handleChangeVolume(val)
   }
   return (
-    <Grid item xs={10}>
+    <>
       <StyledVolumeArea
         isDispSlider={isDispSlider}
         onMouseEnter={() => setIsDispSlider(true)}
@@ -85,19 +84,20 @@ const VolumeBar: React.FC<PropType> = ({ muteToggle, changeVolume }) => {
           )}
         </Transition>
       </StyledVolumeArea>
-    </Grid>
+    </>
   )
 }
 
 export default VolumeBar
 
 const StyledVolumeArea = styled.div<StyledProp>`
-  position: relative;
+  position: absolute;
   width: ${(props) => (props.isDispSlider ? 160 : 30)}px;
-  height: 60px;
+  top: -2px;
+  left: 72px;
   button {
     position: absolute;
-    top: 18px;
+    top: 6px;
     padding: 0;
     border: none;
     outline: none;
@@ -111,7 +111,7 @@ const StyledVolumeArea = styled.div<StyledProp>`
 `
 const StyledVolumeBar = styled.input<StyledVolumeProp>`
   position: absolute;
-  top: 20px;
+  top: 8px;
   left: 24px;
   transition: 0.1s;
   opacity: ${(props) => (props.state === 'entered' ? '1' : '0')};
