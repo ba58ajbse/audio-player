@@ -7,6 +7,7 @@ import TrackDuration from './TrackDuration'
 import TrackCurrentTime from './TrackCurrentTime'
 import TrackTimeWrap from './TrackTimeWrap'
 import VolumeBar from './VolumeBar'
+import DefButton from './utils/styled'
 import audioSrc from '../assets/audio/lilla.mp3'
 
 const Player: React.FC = () => {
@@ -101,12 +102,8 @@ const StyledInfo = styled.div`
     display: block;
   }
 `
-const StyledPlyaButton = styled.button`
-  border: none;
-  outline: none;
-  background-color: transparent;
+const StyledPlyaButton = styled(DefButton)`
   color: ${(props) => props.theme.colors.primaryText};
-  cursor: pointer;
   &:hover {
     opacity: 0.8;
   }

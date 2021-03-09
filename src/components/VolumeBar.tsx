@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent, useEffect } from 'react'
 import { VolumeUp, VolumeOff } from '@material-ui/icons'
 import styled from 'styled-components'
 import { Transition } from 'react-transition-group'
+import DefButton from './utils/styled'
 
 type PropType = {
   muteToggle: () => void
@@ -62,9 +63,9 @@ const VolumeBar: React.FC<PropType> = ({ muteToggle, changeVolume }) => {
         onMouseLeave={() => setIsDispSlider(false)}
         onBlur={() => setIsDispSlider(false)}
       >
-        <button type="button" onClick={handleMute}>
+        <StyledButton type="button" onClick={handleMute}>
           {isMute ? <VolumeOff /> : <VolumeUp />}
-        </button>
+        </StyledButton>
         <Transition in={isDispSlider} timeout={200}>
           {(state) => (
             <StyledVolumeBar
@@ -95,18 +96,14 @@ const StyledVolumeArea = styled.div<StyledProp>`
   width: ${(props) => (props.isDispSlider ? 160 : 30)}px;
   top: -2px;
   left: 72px;
-  button {
-    position: absolute;
-    top: 6px;
-    padding: 0;
-    border: none;
-    outline: none;
-    background-color: transparent;
-    color: ${(props) => props.theme.colors.primaryText};
-    cursor: pointer;
-    &:hover {
-      opacity: 0.8;
-    }
+`
+const StyledButton = styled(DefButton)`
+  position: absolute;
+  top: 6px;
+  padding: 0;
+  color: ${(props) => props.theme.colors.primaryText};
+  &:hover {
+    opacity: 0.8;
   }
 `
 const StyledVolumeBar = styled.input<StyledVolumeProp>`

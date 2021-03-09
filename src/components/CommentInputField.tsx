@@ -1,7 +1,8 @@
 import React, { useState, ChangeEvent } from 'react'
-import { Grid, TextField, IconButton, Divider } from '@material-ui/core'
+import { Grid, TextField, Divider } from '@material-ui/core'
 import { Send } from '@material-ui/icons'
 import styled from 'styled-components'
+import DefButton from './utils/styled'
 
 const CommentInputField: React.FC = () => {
   const [comment, setComment] = useState('')
@@ -32,9 +33,9 @@ const CommentInputField: React.FC = () => {
             />
           </Grid>
           <Grid item xs={2}>
-            <IconButton disabled={comment === ''} onClick={() => sendMessage()}>
+            <StyledButton onClick={() => sendMessage()}>
               <StyledSendIcon />
-            </IconButton>
+            </StyledButton>
           </Grid>
         </Grid>
       </StyledWrap>
@@ -56,6 +57,13 @@ const StyledTextField = styled(TextField)`
     border-bottom: 1px solid ${(props) => props.theme.colors.thirdLight};
   }
 `
+const StyledButton = styled(DefButton)`
+  height: 100%;
+  margin: 8px 0 0 12px;
+`
 const StyledSendIcon = styled(Send)`
   color: ${(props) => props.theme.colors.primaryText};
+  &:hover {
+    color: ${(props) => props.theme.colors.third};
+  }
 `
