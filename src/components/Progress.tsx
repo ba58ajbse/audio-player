@@ -58,6 +58,7 @@ const StyledProgressArea = styled.div`
   }
 `
 const StyledProgressCurrent = styled.div`
+  width: 0;
   height: 6px;
   background-color: #07617d; // third
   border-radius: 10px;
