@@ -12,7 +12,8 @@ import { storage } from '../firebase'
 
 const Player: React.FC = () => {
   const [track, setTrack] = useState<HTMLAudioElement>(new Audio())
-  const [playState, setPlayState] = useState<boolean>(false)
+  const [playState, setPlayState] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false)
   const [duration, setDuration] = useState(0)
   const [currentTime, setCrrentTime] = useState(0)
   const matches = useMediaQuery('(min-width:600px)')
@@ -33,6 +34,7 @@ const Player: React.FC = () => {
     }
     track.ontimeupdate = () => {
       setCrrentTime(track.currentTime)
+      setIsLoaded(true)
     }
     track.onended = () => {
       setCrrentTime(0)
@@ -80,7 +82,11 @@ const Player: React.FC = () => {
           <StyledTrackTitle>title</StyledTrackTitle>
           <StyledArtistName>artist</StyledArtistName>
         </div>
-        <StyledPlyaButton type="button" onClick={() => handlePlayPause()}>
+        <StyledPlyaButton
+          type="button"
+          disabled={isLoaded}
+          onClick={() => handlePlayPause()}
+        >
           {playState ? (
             <PauseCircleOutline style={{ fontSize: 65 }} />
           ) : (
