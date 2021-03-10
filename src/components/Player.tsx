@@ -34,6 +34,10 @@ const Player: React.FC = () => {
     track.ontimeupdate = () => {
       setCrrentTime(track.currentTime)
     }
+    track.onended = () => {
+      setCrrentTime(0)
+      setPlayState(false)
+    }
     document.addEventListener('keydown', spaceKeyPress, false)
 
     return () => {
