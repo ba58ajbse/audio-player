@@ -8,7 +8,7 @@ import TrackCurrentTime from './TrackCurrentTime'
 import TrackTimeWrap from './TrackTimeWrap'
 import VolumeBar from './VolumeBar'
 import DefButton from './utils/styled'
-import audioSrc from '../assets/audio/lilla.mp3'
+import { storage } from '../firebase'
 
 const Player: React.FC = () => {
   const [track, setTrack] = useState<HTMLAudioElement>(new Audio())
@@ -18,7 +18,15 @@ const Player: React.FC = () => {
   const matches = useMediaQuery('(min-width:600px)')
 
   useEffect(() => {
-    track.src = audioSrc
+    storage
+      .child('track/wander.mp3')
+      .getDownloadURL()
+      .then((url) => {
+        track.src = url
+      })
+      .catch((err) => {
+        console.log(err)
+      })
     track.volume = 0.5
     track.onloadedmetadata = () => {
       setDuration(track.duration)
