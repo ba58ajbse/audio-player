@@ -10,8 +10,8 @@ import CommentInputField from './CommentInputField'
 const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
+      <Header />
       <Main>
-        <Header />
         <Player />
         <CommentArea />
         <CommentInputField />
