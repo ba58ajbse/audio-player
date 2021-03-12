@@ -8,7 +8,7 @@ import TrackCurrentTime from './TrackCurrentTime'
 import TrackTimeWrap from './TrackTimeWrap'
 import VolumeBar from './VolumeBar'
 import DefButton from './utils/styled'
-import { storage } from '../firebase'
+// import { storage } from '../firebase'
 
 const Player: React.FC = () => {
   const [track, setTrack] = useState<HTMLAudioElement>(new Audio())
@@ -19,15 +19,15 @@ const Player: React.FC = () => {
   const matches = useMediaQuery('(min-width:600px)')
 
   useEffect(() => {
-    storage
-      .child('track/wander.mp3')
-      .getDownloadURL()
-      .then((url) => {
-        track.src = url
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    // storage
+    //   .child('track/wander.mp3')
+    //   .getDownloadURL()
+    //   .then((url) => {
+    //     track.src = url
+    //   })
+    //   .catch((err) => {
+    //     console.log(err)
+    //   })
     track.volume = 0.5
     track.onloadedmetadata = () => {
       setDuration(track.duration)
@@ -76,7 +76,7 @@ const Player: React.FC = () => {
   }
 
   return (
-    <>
+    <StyledPlayerWrap>
       <StyledInfo>
         <div>
           <StyledTrackTitle>title</StyledTrackTitle>
@@ -106,12 +106,15 @@ const Player: React.FC = () => {
         )}
         <TrackDuration duration={duration} />
       </TrackTimeWrap>
-    </>
+    </StyledPlayerWrap>
   )
 }
 
 export default Player
 
+const StyledPlayerWrap = styled.div`
+  max-width: 1200px;
+`
 const StyledInfo = styled.div`
   display: grid;
   grid-template-columns: 1fr auto;
