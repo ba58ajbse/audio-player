@@ -7,7 +7,7 @@ import TrackDuration from './TrackDuration'
 import TrackCurrentTime from './TrackCurrentTime'
 import TrackTimeWrap from './TrackTimeWrap'
 import VolumeBar from './VolumeBar'
-import DefButton from './utils/styled'
+import { DefButton } from './utils/styled'
 // import { storage } from '../firebase'
 
 const Player: React.FC = () => {
@@ -124,6 +124,7 @@ const StyledInfo = styled.div`
   }
 `
 const StyledPlyaButton = styled(DefButton)`
+  margin-left: 16px;
   color: ${(props) => props.theme.colors.primaryText};
   &:hover {
     opacity: 0.8;
