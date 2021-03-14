@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent } from 'react'
 import { Grid, TextField, Divider } from '@material-ui/core'
 import { Send } from '@material-ui/icons'
 import styled from 'styled-components'
-import DefButton from './utils/styled'
+import { DefButton } from './utils/styled'
 
 const CommentInputField: React.FC = () => {
   const [comment, setComment] = useState('')

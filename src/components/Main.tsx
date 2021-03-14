@@ -1,8 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
+import Player from './Player'
+import CommentArea from './CommentArea'
+import CommentInputField from './CommentInputField'
 
-const Main: React.FC = ({ children }) => {
-  return <StyledContainer>{children}</StyledContainer>
+const Main: React.FC = () => {
+  return (
+    <StyledContainer>
+      <Player />
+      <CommentArea />
+      <CommentInputField />
+    </StyledContainer>
+  )
 }
 
 export default Main

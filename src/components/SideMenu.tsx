@@ -1,8 +1,9 @@
 import React from 'react'
-import { Drawer, List, ListItem } from '@material-ui/core'
+import { Drawer } from '@material-ui/core'
 import { ArrowForwardIos } from '@material-ui/icons'
 import styled from 'styled-components'
-import DefButton from './utils/styled'
+import { DefButton } from './utils/styled'
+import SideMenuList from './SideMenuList'
 
 type PropType = {
   openMenu: boolean
@@ -16,10 +17,7 @@ const SideMenu: React.FC<PropType> = ({ openMenu, toggleOpenMenu }) => {
           <ArrowForwardIos style={{ fontSize: 30 }} />
         </StyledButton>
       </StyledMenuTop>
-      <List component="nav" aria-label="secondary mailbox folders">
-        <ListItem button>プロジェクトを作成する</ListItem>
-        <ListItem button>プロジェクト</ListItem>
-      </List>
+      <SideMenuList />
     </StyledDrawer>
   )
 }

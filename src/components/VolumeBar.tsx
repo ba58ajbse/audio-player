@@ -1,7 +1,7 @@
 import React, { useState, useEffect, ChangeEvent, WheelEvent } from 'react'
 import { VolumeUp, VolumeOff } from '@material-ui/icons'
 import styled from 'styled-components'
-import DefButton from './utils/styled'
+import { DefButton } from './utils/styled'
 
 type PropType = {
   muteToggle: () => void
