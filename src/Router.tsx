@@ -1,8 +1,8 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
-import ProjectCreate from './components/ProjectCreate'
-import Main from './components/Main'
-import ProjectsList from './components/ProjectsList'
+import ProjectCreate from './page/ProjectCreate'
+import Main from './page/Main'
+import ProjectsList from './page/ProjectsList'
 
 const Router: React.FC = ({ children }) => {
   return (
