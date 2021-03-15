@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { InputLabel, Typography } from '@material-ui/core'
 import { ArrowBack } from '@material-ui/icons'
 import styled from 'styled-components'
-import { DefTextField, DefButton } from './utils/styled'
+import { DefTextField, DefButton } from '../components/utils/styled'
 
 const ProjectCreate: React.FC = () => {
   const [uploadFile, setUploadFile] = useState<File>()

@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import Player from './Player'
-import CommentArea from './CommentArea'
-import CommentInputField from './CommentInputField'
+import Player from '../components/Player'
+import CommentArea from '../components/CommentArea'
+import CommentInputField from '../components/CommentInputField'
 
 const Main: React.FC = () => {
   return (

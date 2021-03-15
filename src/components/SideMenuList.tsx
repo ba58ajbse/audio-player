@@ -6,9 +6,11 @@ const SideMenuList: React.FC = () => {
   return (
     <List component="nav" aria-label="secondary mailbox folders">
       <ListItem button>
+        <Link to="/projects">プロジェクト一覧</Link>
+      </ListItem>
+      <ListItem button>
         <Link to="/project-create">プロジェクトを作成する</Link>
       </ListItem>
-      <ListItem button>プロジェクト</ListItem>
     </List>
   )
 }
